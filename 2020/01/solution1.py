@@ -35,9 +35,9 @@ if __name__ == '__main__':
     with open(fname, 'r') as fh:
         inputs = list(reader(fh))
 
-    start = time.time()
+    start = time.monotonic_ns()
     result = main(inputs)
-    end = time.time()
+    end = time.monotonic_ns()
 
     print(result)
-    print(f'Result calculated in {round(end - start):0.5f} seconds.', file=sys.stderr)
+    print(f'Result calculated in {(end - start) / 1e3:0.3f} microseconds.', file=sys.stderr)
