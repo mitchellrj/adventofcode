@@ -20,7 +20,6 @@ def main(expenses):
             m = l
             while True:
                 m -= 1
-                print(b, m, l)
                 s = expenses_sorted[b] + expenses_sorted[m] + expenses_sorted[l]
                 if s == TARGET:
                     return expenses_sorted[l] * expenses_sorted[m] * expenses_sorted[b]
