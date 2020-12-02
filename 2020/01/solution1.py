@@ -11,7 +11,7 @@ def main(expenses):
         if e < 2020:
             break
     if i:
-        expenses_sorted = sexpenses_sorted[i:]
+        expenses_sorted = expenses_sorted[i:]
     b = 0
     while True:
         l = len(expenses_sorted) - 1
