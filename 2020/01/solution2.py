@@ -46,4 +46,4 @@ if __name__ == '__main__':
     end = time.monotonic_ns()
 
     print(result)
-    print(f'Result calculated in {(end - start) / 1e3:0.5f} microseconds.', file=sys.stderr)
+    print(f'Result calculated in {(end - start) / 1e3:0.3f} microseconds.', file=sys.stderr)
