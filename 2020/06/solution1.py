@@ -2,8 +2,8 @@ import sys
 import time
 
 
-def main(yesses):
-    return sum(map(len, yesses))
+def main(union_group_yesses):
+    return sum(map(len, union_group_yesses))
 
 
 def reader(fh):
