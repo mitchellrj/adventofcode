@@ -2,9 +2,6 @@ import sys
 import time
 
 
-ALL_QUESTIONS = frozenset(map(chr, range(97, 123)))
-
-
 def main(yesses):
     return sum(map(len, yesses))
 
