@@ -19,7 +19,7 @@ MATCHER = re.compile(r'([^:\s]+):([^\s]+)')
 def main(passport_data):
     v = 0
     for p in passport_data:
-        v += len(REQUIRED_FIELDS - set(p.keys())) == 0
+        v += REQUIRED_FIELDS >= set(p.keys())
     return v
 
 
