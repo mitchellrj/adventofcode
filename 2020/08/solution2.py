@@ -8,36 +8,35 @@ SWAPPABLE = {'jmp': 'nop', 'nop': 'jmp'}
 def main(code):
     acc = 0
     l = 0
-    execution_order = []
+    executed = set()
     while True:
         try:
-            acc, l, steps = run_partial(code, l, SWAPPABLE.keys(), set(execution_order), acc)
-            execution_order.extend(steps)
+            acc, l = run_partial(code, l, SWAPPABLE.keys(), executed, acc)
         except (RuntimeError, OverflowError):
             operator, operand = code[l]
             acc, l = exec_statement(operator, operand, acc, l)
-            execution_order.append(l)
+            executed.add(l)
             continue
         try:
-            acc = run_with_mutation(code, l, execution_order, acc)
+            acc = run_with_mutation(code, l, executed, acc)
         except (RuntimeError, OverflowError):
             operator, operand = code[l]
             acc, l = exec_statement(operator, operand, acc, l)
-            execution_order.append(l)
+            executed.add(l)
             continue
 
         return acc
 
 
-def run_with_mutation(code, l, execution_order, acc):
+def run_with_mutation(code, l, executed, acc):
     operator, operand = code[l]
     swoperator = SWAPPABLE[operator]
     if operand == 0 and swoperator == 'jmp':
         # this would be an infinite loop by default: unswap it.
         raise RuntimeError('Infinite loop detected!')
-    execution_order.append(l)
+    executed.add(l)
     acc, l = exec_statement(swoperator, operand, acc, l)
-    acc, l, steps = run_partial(code, l, (), set(execution_order), acc)
+    acc, l = run_partial(code, l, (), executed, acc)
     return acc
 
 
@@ -53,7 +52,6 @@ def exec_statement(operator, operand, acc, l):
 
 
 def run_partial(code, l, until, executed, acc):
-    steps = []
     while l != len(code):
         if l > len(code):
             raise OverflowError()
@@ -62,11 +60,10 @@ def run_partial(code, l, until, executed, acc):
             break
         if l in executed:
             raise RuntimeError("Infinite loop detected!")
-        steps.append(l)
         executed.add(l)
         acc, l = exec_statement(operator, operand, acc, l)
 
-    return acc, l, steps
+    return acc, l
 
 def reader(fh):
     for l in fh:
