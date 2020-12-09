@@ -3,22 +3,22 @@ import sys
 import time
 
 
-def main(ciphertext, preamble_length):
+def main(ciphertext, block_size):
     iv = []
-    for i in range(preamble_length):
+    for i in range(block_size):
         iv.extend([
             ciphertext[i] + ciphertext[j]
-            for j in itertools.chain(range(0, i), range(i + 1, preamble_length))
+            for j in itertools.chain(range(0, i), range(i + 1, block_size))
         ])
-    block = ciphertext[:preamble_length]
+    block = ciphertext[:block_size]
     alphabet = iv
-    for i in range(preamble_length, len(ciphertext)):
+    for i in range(block_size, len(ciphertext)):
         c = ciphertext[i]
         if c not in alphabet:
             return c
         block.pop(0)
         block.append(c)
-        alphabet = alphabet[preamble_length:]
+        alphabet = alphabet[block_size:]
         alphabet.extend([
             c + b for b in block
         ])
@@ -32,12 +32,12 @@ def reader(fh):
 
 if __name__ == '__main__':
     fname = sys.argv[1]
-    preamble_length = int(sys.argv[2])
+    block_size = int(sys.argv[2])
     with open(fname, 'r') as fh:
         inputs = list(reader(fh))
 
     start = time.monotonic_ns()
-    result = main(inputs, preamble_length)
+    result = main(inputs, block_size)
     end = time.monotonic_ns()
 
     print(result)
