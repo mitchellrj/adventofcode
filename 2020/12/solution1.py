@@ -1,4 +1,3 @@
-import collections
 import enum
 import math
 import sys
@@ -14,9 +13,6 @@ class Operator(enum.Enum):
     TURN_LEFT = 'L'
     TURN_RIGHT = 'R'
     MOVE_FORWARD = 'F'
-
-
-Location = collections.namedtuple('Location', ['x', 'y'])
 
 
 class Ship:
