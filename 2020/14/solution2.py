@@ -21,7 +21,7 @@ def make_masks(input_mask):
 
 
 def main(commands):
-    floating_mask, or_mask = make_masks('X' * 36)
+    floating_mask, or_mask = make_masks('0' * 36)
     mem = {}
     for command, op1, op2 in commands:
         if command == SET_MEM:
