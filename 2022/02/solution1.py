@@ -42,9 +42,9 @@ RESULT_SCORE = {
 }
 
 
-def main(shapes):
+def main(rounds):
     total_score = 0
-    for opponent_shape, player_shape in shapes:
+    for opponent_shape, player_shape in rounds:
         total_score += SHAPE_SCORE[player_shape] + RESULT_SCORE[(opponent_shape, player_shape)]
 
     return total_score
