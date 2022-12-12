@@ -3,12 +3,15 @@ import sys
 import time
 
 
+PATTERN_SIZE = 4
+
+
 def main(datastream):
     pos = 0
     # What's more efficient? The naive solution or using some sort of ordered set type thing?
     # For a larger sequence than 4, probably the latter, but I reckon naive will beat the hash
     # calculation and lookup. We can probably do something a bit clever with file reads though.
-    chars_to_read = 4
+    chars_to_read = PATTERN_SIZE
     buf = ""
     while True:
         new_chars = datastream.read(chars_to_read)
