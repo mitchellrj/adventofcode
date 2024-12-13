@@ -1,7 +1,6 @@
 import re
 import sys
 import time
-import typing
 
 
 def main(list1, list2):

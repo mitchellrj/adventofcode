@@ -1,7 +1,5 @@
-import re
 import sys
 import time
-import typing
 
 
 def main(reports):
