@@ -75,7 +75,6 @@ def find_area(plant_positions, coords_to_area_id, seen, plant, x, y, area_id=Non
     return area_id, area, perimeter
 
 
-
 def reader(fh):
     plan = []
     for row in fh:
