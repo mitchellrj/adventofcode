@@ -1,12 +1,9 @@
-import operator
 import sys
 import time
 
 
 def main(plan):
     # Walk and allocate area IDs as we go
-    y_max = len(plan)
-    x_max = len(plan[0])
     plant_positions = {}
     for y, row in enumerate(plan):
         for x, plant in enumerate(row):
